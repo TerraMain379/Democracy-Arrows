@@ -1,0 +1,26 @@
+CFLAGS=-c -Wall
+
+SOURCES_GLOBAL=main/main.c
+SOURCES_SYS_WINDOWS=render/window_windows.c
+SOURCES_SYS_LINUX=render/window_linux.c
+SYS=SOURCES_SYS_WINDOWS
+
+SOURCES=$(SOURCES) $$(SYS)
+OBJECTS=$(patsubst %.c,o/%.o,$(SOURCES))
+
+
+EXECUTABLE=program
+all: clean $(EXECUTABLE)
+	
+program: $(OBJECTS) 
+	gcc $(OBJECTS) -o $@
+
+o/%.o: %.c
+	mkdir -p "$$(dirname $@)"
+	gcc $(CFLAGS) $< -o $@
+
+clean:
+	rm -r -d o
+
+run: all
+	./$(EXECUTABLE)
