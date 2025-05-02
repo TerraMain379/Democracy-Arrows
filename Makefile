@@ -17,9 +17,9 @@ PROGRAM_FOLDER=cache
 FLAGS_GCC= -c -Wall
 
 # SOURCES
-SOURCE_GLOBAL=main/main.c
-SOURCE_SYS_WINDOWS=render/window_windows.c
-SOURCE_SYS_LINUX=render/window_linux.c
+SOURCE_GLOBAL=main/main.c base64/base64.c
+SOURCE_SYS_WINDOWS=
+SOURCE_SYS_LINUX=
 SRC=src
 
 # CLEAN
