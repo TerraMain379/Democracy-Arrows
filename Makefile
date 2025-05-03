@@ -1,51 +1,27 @@
-# for build project run "make <os>" or "make clean <os>"
-# oss: windows, linux
-# example:
-# 	make clean windows
-# 	make clean linux
-#
-# for run project "./<PROGRAM_FOLDER>/program"
-# example:
-# 	./cache/program
-
-
-
-
 # SETTINGS 
 OBJECTS_FOLDER=cache/o
 PROGRAM_FOLDER=cache
 FLAGS_GCC= -c -Wall
 
 # SOURCES
-SOURCE_GLOBAL=main/main.c base64/base64.c
-SOURCE_SYS_WINDOWS=
-SOURCE_SYS_LINUX=
+SOURCES=main.c world/world.c world/worldlogic.c logicarrows/logicarrows.c str.c
 SRC=src
 
 # CLEAN
+all: clean build
 clean:
 	rm -d -r -f $(OBJECTS_FOLDER)
 
 # BUILD
 
-SYS ?= LINUX
-
-MAKEFLAGS = --no-print-directory
-linux:
-	@$(MAKE) $(MAKEFLAGS) SYS=LINUX build
-windows:
-	@$(MAKE) $(MAKEFLAGS) SYS=WINDOWS build
-
-SOURCES=$(SOURCE_GLOBAL) $(SOURCE_SYS_$(SYS))
 OBJECTS=$(patsubst %.c,$(OBJECTS_FOLDER)/%.o,$(SOURCES))
-
 build: info program
+	@echo "file: $(PROGRAM_FOLDER)/program"
+	@echo "BUILDING SUCCESS!"
 
 info:
 	@echo "src Dericory: $(SRC)"
 	@echo "Global sources: $(SOURCE_GLOBAL)"
-	@echo "System sources: $(SOURCE_SYS_$(SYS))"
-	@echo "Building for $(SYS)"
 	@echo SOURCES: $(SOURCES)
 	@echo OBJECTS: $(OBJECTS)
 
@@ -57,3 +33,5 @@ $(OBJECTS_FOLDER)/%.o: $(SRC)/%.c
 	@mkdir -p "$$(dirname $@)"
 	gcc $(FLAGS_GCC) $< -o $@
 
+run:
+	@./$(PROGRAM_FOLDER)/program
