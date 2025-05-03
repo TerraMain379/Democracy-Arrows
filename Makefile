@@ -1,10 +1,10 @@
 # SETTINGS 
 OBJECTS_FOLDER=cache/o
 PROGRAM_FOLDER=cache
-FLAGS_GCC= -c -Wall
+CFLAGS= -c -Wall
 
 # SOURCES
-SOURCES=main.c world/world.c world/worldlogic.c logicarrows/logicarrows.c str.c
+SOURCES=main.c world/world.c world/worldlogic.c logicarrows/logicarrows.c str./0
 SRC=src
 
 # CLEAN
@@ -26,12 +26,12 @@ info:
 	@echo OBJECTS: $(OBJECTS)
 
 program: $(OBJECTS)
-	gcc $(OBJECTS) -o $(PROGRAM_FOLDER)/program
+	$(CC) $(OBJECTS) -o $(PROGRAM_FOLDER)/program
 
 
 $(OBJECTS_FOLDER)/%.o: $(SRC)/%.c
 	@mkdir -p "$$(dirname $@)"
-	gcc $(FLAGS_GCC) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 run:
 	@./$(PROGRAM_FOLDER)/program
